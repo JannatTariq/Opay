@@ -97,7 +97,7 @@ function App() {
                     <Payment />
                   </Elements>
                 }
-                path="/payment"
+                path="/process/payment"
               />
             )}
             <Route element={<Success />} path="/success" exact />

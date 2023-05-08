@@ -140,10 +140,6 @@ const Payment = () => {
           loop
           className="video__Login"
         >
-          <source
-            //src="https://res.cloudinary.com/hateybazarey/video/upload/v1675581440/animated_medium20211108-706-13l21c4_lf5lpv.mp4"
-            //type="video/mp4"
-          />
           
         </video>
         <form className="login " onSubmit={submitHandler}>

@@ -13,7 +13,7 @@ const orderSchema = new mongoose.Schema({
 
     state: {
       type: String,
-      required: true,
+      required: false,
     },
 
     country: {
@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
     },
     pinCode: {
       type: Number,
-      required: true,
+      required: false,
     },
     phoneNo: {
       type: Number,
