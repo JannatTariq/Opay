@@ -30,7 +30,7 @@ app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
 app.use("/api/admin-dashboard", dashboard);
-app.use("/api/category", category);
+app.use("/api/categories", category);
 app.use(express.static(path.join(__dirname, "../frontend/build")));
 
 app.get("*", (req, res) => {

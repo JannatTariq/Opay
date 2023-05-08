@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-
+import CategoryManagement from "./pages/Admin/categoryManagement";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
@@ -117,6 +117,7 @@ function App() {
             <Route element={<UsersList />} path="/admin/users" exact />
             <Route element={<UpdateUser />} path="/admin/user/:id" exact />
             <Route element={<ProductReviews />} path="/admin/reviews" exact />
+            <Route element={<CategoryManagement />} path="/admin/categories" exact />
           </Route>
         </Routes>
         {/* <Footer /> */}
