@@ -81,7 +81,7 @@ const Register = () => {
             onSubmit={submitHandler}
             encType="multipart/form-data"
           >
-            <h2>Hi , Internet</h2>
+            <h2>Hi , Customer</h2>
             <p>We are selling products at an affordable price.</p>
 
             <div className="form-group">
