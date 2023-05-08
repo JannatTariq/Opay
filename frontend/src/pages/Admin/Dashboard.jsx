@@ -1,14 +1,17 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import { Link } from 'react-router-dom';
-
+import axios from 'axios';
 import {MetaData, Loader} from '../../components/allComponents'
 import {Sidebar} from '../allpages'
 
 import { getAdminProducts } from '../../actions/productActions'
 import { allOrders } from '../../actions/orderActions'
 import { allUsers } from '../../actions/userActions'
-
+import styles from '../../adminDashboard.module.css';
+import { Spinner } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid,Bar,BarChart, Tooltip, Legend } from 'recharts';
+
 
 const Dashboard = () => {
 
@@ -17,7 +20,49 @@ const Dashboard = () => {
     const { products } = useSelector(state => state.products)
     const { users } = useSelector(state => state.allUsers)
     const { orders, totalAmount, loading } = useSelector(state => state.allOrders)
+    const [revenueData, setRevenueData] = useState([]);
+  const [orderCountData, setOrderCountData] = useState([]);
+  const [topSellingData, setTopSellingData] = useState([]);
+  const [salesByCategoryData, setSalesByCategoryData] = useState([]);
 
+  useEffect(() => {
+ 
+    const fetchRevenueData = async () => {
+      const response = await axios.get('http://localhost:3000/api/admin-dashboard/revenue');
+      setRevenueData(response.data);
+    };
+  
+    const fetchOrderCountData = async () => {
+      const response = await axios.get('http://localhost:3000/api/admin-dashboard/orders');
+      const formattedData = response.data.map((item) => ({
+        month: item._id,
+        orderCount: item.count
+      }));
+      setOrderCountData(formattedData);
+    };
+    
+  
+    const fetchTopSellingData = async () => {
+      const response = await axios.get('http://localhost:3000/api/admin-dashboard/topSelling');
+      setTopSellingData(response.data);
+    };
+  
+    const fetchSalesByCategoryData = async () => {
+      const response = await axios.get('http://localhost:3000/api/admin-dashboard/sales');
+      const formattedData = response.data.map((item) => ({
+        category: item.category,
+        sales: item.revenue
+      }));
+      setSalesByCategoryData(formattedData);
+    };
+    
+
+    fetchRevenueData();
+    fetchOrderCountData();
+    fetchTopSellingData();
+    fetchSalesByCategoryData();
+  }, []);
+  
 
     let outOfStock = 0;
     products.forEach(product => {
@@ -113,11 +158,58 @@ const Dashboard = () => {
                         </>
                     )}
 
-                </div>
-            </div>
+                
+            
+            <div className={styles.container}>
 
+  <div className={styles.chartsContainer}>
+    <div className={styles.chart}>
+      <h2 className={styles.chartHeading}>Revenue by Month</h2>
+      <LineChart width={800} height={400} data={revenueData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="revenue" stroke="#8884d8" />
+      </LineChart>
+    </div>
+    <div className={styles.chart}>
+      <h2 className={styles.chartHeading}>Order Count by Month</h2>
+      <LineChart width={800} height={400} data={orderCountData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="month" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line type="monotone" dataKey="orderCount" stroke="#82ca9d" />
+      </LineChart>
+    </div>
+    <div className={styles.chart}>
+      <h2 className={styles.chartHeading}>Top Selling Products</h2>
+      <ul className={styles.productList}>
+        {topSellingData.map((product) => (
+          <li key={product._id}>
+            {product.name} - {product.sales} sales
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div className={styles.chart}>
+      <h2 className={styles.chartHeading}>Sales by Category</h2>
+      <BarChart width={800} height={400} data={salesByCategoryData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="category" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Bar dataKey="sales" fill="#8884d8" />
+      </BarChart>
+    </div>
+  </div>
+  </div></div></div>
         </>
     )
-}
+};
 
-export default Dashboard
+export default Dashboard;
