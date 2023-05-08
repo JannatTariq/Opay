@@ -147,14 +147,7 @@ const Updateprofile = () => {
             />
           </form>
 
-          <img
-            src="https://res.cloudinary.com/hateybazarey/image/upload/v1675327743/image_processing20230201-31279-1a43vmw_swv7ca.gif"
-            width="520"
-            height="440"
-            className="video__Login"
-            alt="update profile animation"
-            draggable='false'
-          />
+         
         </div>
       </div>
     </>

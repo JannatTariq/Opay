@@ -65,7 +65,7 @@ const User = () => {
                     <label>
                       {user && user.role === "seller"
                         ? "Seller"
-                        : "Customer"}
+                        : ""}
                     </label>
                   </div>
                 </div>
