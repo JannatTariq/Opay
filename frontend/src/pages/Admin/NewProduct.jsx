@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { MetaData } from "../../components/allComponents";
-import Sidebar from "./Sidebar";
+import Sideba from "./seller";
 import "./Alladmin.css";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
@@ -100,7 +100,7 @@ const NewProduct = () => {
       <MetaData title={"New Product"} />
       <div className="row">
         <div className="col-12 col-md-2">
-          <Sidebar />
+          <Sideba />
         </div>
 
         <div className="col-12 col-md-10">

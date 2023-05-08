@@ -60,7 +60,12 @@ const User = () => {
                     <label>
                       {user && user.role === "admin"
                         ? "Admin"
-                        : "Royel Customer"}
+                        : ""}
+                    </label>
+                    <label>
+                      {user && user.role === "seller"
+                        ? "Seller"
+                        : "Customer"}
                     </label>
                   </div>
                 </div>
@@ -71,22 +76,30 @@ const User = () => {
                   </button>
                 </Link>
 
+                {user && (user.role !== "admin" && user.role !== "seller") && (
+  <Link to="/orders/me">
+    <button className="box">
+      <BsBagCheck className="icon" />
+      <h4>My Order</h4>
+    </button>
+  </Link>
+)} {user && (user.role !== "user" && user.role !== "seller") && (
+  <Link to="/dashboard">
+    <button className="box">
+      <RxDashboard className="icon" />
+      <h4>Dashboard</h4>
+    </button>
+  </Link>
+)} {user && (user.role !== "admin" && user.role !== "user") && (
+  <Link to="/dashboard1">
+    <button className="box">
+      <RxDashboard className="icon" />
+      <h4>Seller</h4>
+    </button>
+  </Link>
+)}
 
-                {user && user.role !== "admin" ? (
-                  <Link to="/orders/me">
-                    <button className="box">
-                      <BsBagCheck className="icon" />
-                      <h4>My Order</h4>
-                    </button>
-                  </Link>
-                ) : (
-                  <Link to="/dashboard">
-                    <button className="box">
-                      <RxDashboard className="icon" />
-                      <h4>Dashboard</h4>
-                    </button>
-                  </Link>
-                )}
+                
                 <Link to="/">
                   <button className="box" onClick={logoutHandler}>
                     <BiLogOut className="icon" />

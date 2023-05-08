@@ -28,12 +28,12 @@ const Dashboard = () => {
   useEffect(() => {
  
     const fetchRevenueData = async () => {
-      const response = await axios.get('http://localhost:3000/api/admin-dashboard/revenue');
+      const response = await axios.get('api/v1/admin-dashboard/revenue');
       setRevenueData(response.data);
     };
   
     const fetchOrderCountData = async () => {
-      const response = await axios.get('http://localhost:3000/api/admin-dashboard/orders');
+      const response = await axios.get('api/v1/admin-dashboard/orders');
       const formattedData = response.data.map((item) => ({
         month: item._id,
         orderCount: item.count

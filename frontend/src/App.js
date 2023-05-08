@@ -21,6 +21,7 @@ import {
   Success,
 } from "./components/allComponents";
 import {
+  SellerDashboard,
   Dashboard,
   Home,
   ListOrders,
@@ -105,8 +106,9 @@ function App() {
             <Route element={<OrderDetails />} path="/order/:id" exact />
 
             <Route element={<Dashboard />} path="dashboard" exact />
+            <Route element={<SellerDashboard />} path="dashboard1" exact />
             <Route element={<ProductsList />} path="admin/products" exact />
-            <Route element={<NewProduct />} path="admin/product" exact />
+            <Route element={<NewProduct />} path="admin/product/seller" exact />
             <Route
               element={<UpdateProduct />}
               path="/admin/product/:id"

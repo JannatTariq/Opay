@@ -18,11 +18,11 @@ router.route("/products").get(getAllProducts);
 
 router
   .route("/admin/products")
-  .get(isAuthenticatedUser, authorizeRoles("admin"), getAdminProducts);
+  .get(isAuthenticatedUser, authorizeRoles("seller"),authorizeRoles("admin"), getAdminProducts);
 
 router
   .route("/admin/products/new")
-  .post(isAuthenticatedUser, authorizeRoles("admin"), createProduct);
+  .post(isAuthenticatedUser, authorizeRoles("seller"), createProduct);
 
 router
   .route("/admin/product/:id")

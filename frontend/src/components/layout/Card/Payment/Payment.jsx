@@ -17,6 +17,7 @@ import {
 
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const options = {
@@ -35,10 +36,16 @@ const Payment = () => {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
-
+  
   const { user } = useSelector((state) => state.auth);
   const { cartItems, shippingInfo } = useSelector((state) => state.cart);
   const { error } = useSelector((state) => state.newOrder);
+  const [cartItem, setCartItems] = useState([]);
+
+    function clearCart() {
+      localStorage.removeItem('cartItems');
+      setCartItems([]);
+    } 
 
   useEffect(() => {
     if (error) {
@@ -79,7 +86,7 @@ const Payment = () => {
       };
 
       res = await axios.post("/api/v1/payment/process", paymentData, config);
-
+      clearCart();
       const clientSecret = res.data.client_secret;
 
       // console.log(clientSecret);
@@ -115,6 +122,7 @@ const Payment = () => {
           dispatch(createOrder(order))
           
           navigate("/success");
+         
         } else {
           toast.error("There is some issue while payment processing");
         }
