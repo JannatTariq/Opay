@@ -30,7 +30,7 @@ const ConfirmOrder = () => {
     };
 
     sessionStorage.setItem("orderInfo", JSON.stringify(data));
-    navigate("/order/payment");
+    navigate("/process/payment");
   };
 
   return (

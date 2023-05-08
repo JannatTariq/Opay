@@ -34,7 +34,7 @@ const CheckoutSteps = ({ shipping, confirmOrder, payment }) => {
       )}
 
       {payment ? (
-        <Link to="/order/payment" className="float-right">
+        <Link to="/process/payment" className="float-right">
           <div className="triangle2-active"></div>
           <div className="step active-step">Payment</div>
           <div className="triangle-active"></div>
