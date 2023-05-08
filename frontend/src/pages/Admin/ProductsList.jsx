@@ -71,26 +71,29 @@ const ProductsList = () => {
             ],
             rows: []
         }
-
-        products.forEach(product => {
-            data.rows.push({
-                id: product._id,
-                name: product.name,
-                price: `$${product.price}`,
-                stock: product.stock,
-                actions: <>
-                    <Link to={`/admin/product/${product._id}`} className="btns btn-primary py-1 px-2">
-                        <i className="fa fa-pencil"></i>
-                    </Link>
-                    <button className="btns btn-danger py-1 px-2 ml-2"  onClick={() => deleteProductHandler(product._id)}>
-                        <i className="fa fa-trash"></i>
-                    </button>
-                </>
+    
+        if (products) {
+            products.forEach(product => {
+                data.rows.push({
+                    id: product._id,
+                    name: product.name,
+                    price: `$${product.price}`,
+                    stock: product.stock,
+                    actions: <>
+                        <Link to={`/admin/product/${product._id}`} className="btns btn-primary py-1 px-2">
+                            <i className="fa fa-pencil"></i>
+                        </Link>
+                        <button className="btns btn-danger py-1 px-2 ml-2"  onClick={() => deleteProductHandler(product._id)}>
+                            <i className="fa fa-trash"></i>
+                        </button>
+                    </>
+                })
             })
-        })
-
+        }
+    
         return data;
     }
+    
 
     const deleteProductHandler = (id) => {
         dispatch(deleteProduct(id))
