@@ -17,7 +17,7 @@ const CategoryManagement = () => {
   
     const fetchCategories = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/categories');
+        const response = await axios.get('http://localhost:4000/api/categories');
         setCategories(response.data);
       } catch (error) {
         console.error(error);
@@ -29,7 +29,7 @@ const CategoryManagement = () => {
     function handleDeleteCategory(categoryId) {
       setLoading(true);
       // Send a DELETE request to the backend API to delete the category
-      fetch(`http://localhost:3000/api/categories/${categoryId}`, {
+      fetch(`http://localhost:4000/api/categories/${categoryId}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -54,7 +54,7 @@ const CategoryManagement = () => {
       e.preventDefault();
       setLoading(true);
       try {
-        const response = await fetch("http://localhost:3000/api/categories", {
+        const response = await fetch("http://localhost:4000/api/categories", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

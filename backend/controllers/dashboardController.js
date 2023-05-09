@@ -104,24 +104,13 @@ exports.getTopSellingProducts = async (req, res) => {
 
 exports.getSalesByCategory = async (req, res) => {
   try {
-    const orders = await Order.find().populate({
-      path: "orderItems.product",
-      select: "category",
-      populate: {
-        path: "category",
-        select: "name",
-      },
-    });
+    const orders = await Order.find().populate("orderItems.product");
 
     const salesByCategory = new Map();
 
     for (const order of orders) {
       for (const item of order.orderItems) {
-        console.log(order)
-        console.log("OK")
-        console.log("OK")
-        console.log(item)
-        const category = item.product && item.product.category && item.product.category.name;
+        const category = item.product && item.product.category;
         const quantity = item.quantity;
         const revenue = quantity * item.price;
 
